@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { PDFParser } from 'pdfnano';
-import OpenAI from 'openai';
+import { PDFParser } from 'pdfnano'; //For Parsing PDF
+import OpenAI from 'openai'; //For converting to json
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY, //Key stored in .env file for security
 });
 
 export async function POST(request: Request) {
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const file = formData.get('file') as File | null;
 
     if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 }); //Error code for no file
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -21,13 +21,13 @@ export async function POST(request: Request) {
     const pdfResult = await parser.parseBuffer(buffer);
     const syllabusText = pdfResult.text;
     
-    console.log('✅ 1. Extracted Text Length:', syllabusText.trim().length);
+    console.log('✅ 1. Extracted Text Length:', syllabusText.trim().length); //Logs to keep track how far the code works
 
     if (syllabusText.trim().length === 0) {
       throw new Error("Extracted syllabus text is empty.");
     }
 
-    // --- PROMPT HERE ---
+    // ChatGpt Prompt
     const prompt = `
       You are an expert assistant. Your task is to extract calendar events from the following syllabus text and return a valid JSON object.
       The JSON object must contain a single key "events", which holds an array of event objects.
@@ -40,6 +40,7 @@ export async function POST(request: Request) {
       ---
     `;
 
+    //Takes response from AI
     const aiResponse = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [{ role: "user", content: prompt }],
@@ -54,10 +55,12 @@ export async function POST(request: Request) {
       throw new Error("AI failed to return content.");
     }
     
+    //Parsing JSON content into structured data
     const structuredData = JSON.parse(content);
 
     console.log('✅ 3. Sending structured data to frontend:', structuredData);
 
+    //Calls API for calender
     return NextResponse.json(structuredData);
 
   } catch (error) {

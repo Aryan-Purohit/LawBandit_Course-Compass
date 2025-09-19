@@ -2,10 +2,11 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar'; //For Calender View
+import { format, parse, startOfWeek, getDay } from 'date-fns'; // For Formatting data from pdf
 import { enUS } from 'date-fns/locale/en-US';
 
+//Defining Types
 type CalendarEvent = {
   title: string;
   date: string;
@@ -29,6 +30,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
+//Main
 export default function SyllabusUploader() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +48,7 @@ export default function SyllabusUploader() {
     }));
   }, [events]);
 
-  // --- ADD THE CONSOLE LOG IN THIS FUNCTION ---
+  // Console Logs
   const eventPropGetter = useCallback(
     (event: FormattedCalendarEvent) => {
       const type = event.resource.type;
@@ -55,7 +57,7 @@ export default function SyllabusUploader() {
         type === 'Assignment' ? 'rbc-event-assignment' :
         'rbc-event-reading';
 
-      // --- THIS IS THE CRITICAL DEBUG LOG ---
+      // Debug Log
       console.log(`Event: "${event.title}", Type: "${type}", Applying Class: "${className}"`);
 
       return { className };
@@ -136,8 +138,8 @@ export default function SyllabusUploader() {
               onChange={(e) => setView(e.target.value as 'calendar' | 'list')}
               className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-48 p-2.5"
             >
-              <option value="calendar">Calendar View</option>
-              <option value="list">List View</option>
+              <option value="calendar">Calendar</option>
+              <option value="list">Agenda</option>
             </select>
           </div>
 
@@ -154,7 +156,7 @@ export default function SyllabusUploader() {
                 views={['month']}
                 date={date}
                 onNavigate={(newDate) => setDate(newDate)}
-                // --- Don't forget to pass the function to the calendar! ---
+                // Gets the assignment type and passes on to the calender 
                 eventPropGetter={eventPropGetter}
               />
             </div>
