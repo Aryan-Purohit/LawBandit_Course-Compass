@@ -8,12 +8,12 @@
 
 This project is a submission for the LawBandit Software Internship selection. Course Compass is a web application that transforms a student's unstructured course syllabus into a beautifully organized and interactive calendar. By leveraging AI, it automates the tedious process of manually tracking deadlines, readings, and exams.
 
-**Live Demo:** [**your-project-name.vercel.app**](https://your-project-name.vercel.app)
+**Live Demo:** [**your-project-name.vercel.app**](https://law-bandit-course-compass.vercel.app/)
 
 ---
 
-![Course Compass Screenshot](https://i.imgur.com/GkmD7sJ.png)
-*(You should replace this with a screenshot of your own running application!)*
+<img width="1883" height="1039" alt="image" src="https://github.com/user-attachments/assets/caf963c0-1da2-4bcc-9623-5e603fa73b4f" />
+
 
 ## Key Features
 
@@ -65,4 +65,4 @@ To run this project on your local machine, follow these steps:
     npm run dev
     ```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `https://law-bandit-course-compass.vercel.app/`.
