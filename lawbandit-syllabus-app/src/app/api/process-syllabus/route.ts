@@ -21,8 +21,7 @@ export async function POST(request: Request) {
     const pdfResult = await parser.parseBuffer(buffer);
     const syllabusText = pdfResult.text;
     
-    console.log('✅ 1. Extracted Text Length:', syllabusText.trim().length); //Logs to keep track how far the code works
-
+    
     if (syllabusText.trim().length === 0) {
       throw new Error("Extracted syllabus text is empty.");
     }
@@ -49,16 +48,12 @@ export async function POST(request: Request) {
 
     const content = aiResponse.choices[0].message.content;
 
-    console.log('✅ 2. Raw AI Response Content:', content);
-
     if (!content) {
       throw new Error("AI failed to return content.");
     }
     
     //Parsing JSON content into structured data
     const structuredData = JSON.parse(content);
-
-    console.log('✅ 3. Sending structured data to frontend:', structuredData);
 
     //Calls API for calender
     return NextResponse.json(structuredData);

@@ -48,7 +48,7 @@ export default function SyllabusUploader() {
     }));
   }, [events]);
 
-  // Console Logs
+  // This stores the type of the assignment/exam to be feed later to the calender 
   const eventPropGetter = useCallback(
     (event: FormattedCalendarEvent) => {
       const type = event.resource.type;
@@ -56,10 +56,7 @@ export default function SyllabusUploader() {
         type === 'Exam' ? 'rbc-event-exam' :
         type === 'Assignment' ? 'rbc-event-assignment' :
         'rbc-event-reading';
-
-      // Debug Log
-      console.log(`Event: "${event.title}", Type: "${type}", Applying Class: "${className}"`);
-
+        
       return { className };
     },
     []
