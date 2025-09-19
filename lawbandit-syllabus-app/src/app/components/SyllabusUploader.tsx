@@ -81,9 +81,9 @@ export default function SyllabusUploader() {
       } else {
         throw new Error(data.error || 'Something went wrong');
       }
-    } catch (err: unknown) { // FIX: Changed 'any' to 'unknown' to solve the Vercel build error(Lint specifications)
-      console.error('Upload error:', err);
+    } catch (err: unknown) {
       let errorMessage = 'An unexpected error occurred.';
+      // Check if the error is a standard Error object to safely access its message
       if (err instanceof Error) {
         errorMessage = err.message;
       }
