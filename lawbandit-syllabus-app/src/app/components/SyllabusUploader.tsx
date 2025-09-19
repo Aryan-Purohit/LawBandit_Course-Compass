@@ -81,9 +81,13 @@ export default function SyllabusUploader() {
       } else {
         throw new Error(data.error || 'Something went wrong');
       }
-    } catch (err: Unknown) {
+    } catch (err: unknown) { // FIX: Changed 'any' to 'unknown' to solve the Vercel build error(Lint specifications)
       console.error('Upload error:', err);
-      setError(`Error: ${err.message}`);
+      let errorMessage = 'An unexpected error occurred.';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      setError(`Error: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
