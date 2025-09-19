@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server';
 import { PDFParser } from 'pdfnano'; //For Parsing PDF
 import OpenAI from 'openai'; //For converting to json
 
+const apiKey = process.env.OPENAI_API_KEY;
+
+console.log(
+  '--- VERCEL ENV CHECK ---',
+  apiKey ? `Key Loaded. Starts with: ${apiKey.substring(0, 5)}` : '!!! Key is NOT LOADED or is empty !!!'
+);
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, //Key stored in .env file for security
 });
