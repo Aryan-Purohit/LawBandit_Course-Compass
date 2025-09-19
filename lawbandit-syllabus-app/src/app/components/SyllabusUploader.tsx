@@ -81,7 +81,7 @@ export default function SyllabusUploader() {
       } else {
         throw new Error(data.error || 'Something went wrong');
       }
-    } catch (err: any) {
+    } catch (err: Unknown) {
       console.error('Upload error:', err);
       setError(`Error: ${err.message}`);
     } finally {
