@@ -24,3 +24,76 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- Custom styles for react-big-calendar dark mode --- */
+
+/* Change main text and border colors */
+.rbc-calendar {
+  color: #e5e7eb; /* Light gray text */
+}
+.rbc-month-view, .rbc-time-view, .rbc-agenda-view {
+  border: 1px solid #4b5563; /* Gray border */
+}
+.rbc-header {
+  border-bottom: 1px solid #4b5563;
+}
+
+
+/* Forcefully remove the light gray background from the cells */
+.rbc-off-range-bg {
+  background-color: transparent !important;
+}
+
+.rbc-off-range .rbc-date-cell a {
+  color: #6b7280 !important;
+}
+
+/* New style for today's date - uses a border instead of a background fill */
+.rbc-day-bg.rbc-today {
+  border: 2px solid #8b5cf6;    /* A vibrant purple border */
+  background-color: transparent; /* Important: remove the old background fill */
+}
+
+
+/* Toolbar (header with month name and buttons) */
+.rbc-toolbar button {
+  color: #ffffff !important; /* Default state: light text */
+  background-color: #4b5563; /* Default state: dark background */
+  border: 1px solid #6b7280 !important;
+  transition: all 0.2s ease-in-out; /* Adds a nice, smooth transition effect */
+}
+
+/* NEW: Style for when a button is hovered over or clicked */
+.rbc-toolbar button:hover,
+.rbc-toolbar button:active,
+.rbc-toolbar button:focus {
+  background-color: #ffffff !important; /* Selected state: white background */
+  color: #111827 !important;      /* Selected state: black text */
+  border-color: #ffffff !important;
+}
+
+.rbc-toolbar .rbc-toolbar-label {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Events */
+/* Custom styles for different event types */
+.rbc-event {
+  padding: 2px 5px !important;
+  color: white !important;
+  border: none !important; /* Reset any default borders */
+}
+
+/* Note the combined classes (.rbc-event.rbc-event-assignment) for higher specificity */
+.rbc-event.rbc-event-assignment {
+  background-color: #3b82f6 !important; /* Blue */
+}
+
+.rbc-event.rbc-event-reading {
+  background-color: #22c55e !important; /* Green */
+}
+
+.rbc-event.rbc-event-exam {
+  background-color: #ef4444 !important; /* Red */
+}
